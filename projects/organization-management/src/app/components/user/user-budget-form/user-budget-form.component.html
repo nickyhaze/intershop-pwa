@@ -29,7 +29,7 @@
                 class="form-control"
                 id="budget_input"
                 formControlName="budget"
-                attr.data-testing-id="budget"
+                data-testing-id="budget"
               />
             </div>
             <ish-form-control-feedback
@@ -40,7 +40,7 @@
 
           <!--Budget period -->
           <div class="col-6">
-            <select class="form-control" formControlName="budgetPeriod" attr.data-testing-id="budgetPeriod">
+            <select class="form-control" formControlName="budgetPeriod" data-testing-id="budgetPeriod">
               <option *ngFor="let period of periods" [value]="period">
                 <span>{{ 'account.user.new.budget.period.value.' + period | translate }}</span>
               </option>

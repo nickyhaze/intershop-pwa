@@ -21,6 +21,10 @@ export class UsersDetailPage {
     return cy.get('[data-testing-id="edit-roles"]').click();
   }
 
+  editBudget() {
+    return cy.get('[data-testing-id="edit-budget"]').click();
+  }
+
   goToUserManagement() {
     cy.get('[data-testing-id="back-to-user-management"]').click();
   }
@@ -35,5 +39,9 @@ export class UsersDetailPage {
 
   get budget() {
     return cy.get(this.tag).find('[data-testing-id="budget-field"]');
+  }
+
+  get userBudgets() {
+    return cy.get(this.tag).find('[data-testing-id="user-budgets"]');
   }
 }
