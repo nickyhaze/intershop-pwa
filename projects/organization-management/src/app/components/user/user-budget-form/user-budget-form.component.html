@@ -42,7 +42,7 @@
           <div class="col-6">
             <select class="form-control" formControlName="budgetPeriod" data-testing-id="budgetPeriod">
               <option *ngFor="let period of periods" [value]="period">
-                <span>{{ 'account.user.new.budget.period.value.' + period | translate }}</span>
+                {{ 'account.user.new.budget.period.value.' + period | translate }}
               </option>
             </select>
           </div>
