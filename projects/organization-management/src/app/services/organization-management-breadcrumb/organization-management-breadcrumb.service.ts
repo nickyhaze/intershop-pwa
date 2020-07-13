@@ -55,6 +55,8 @@ export class OrganizationManagementBreadcrumbService {
                   ]
             )
           );
+        } else if (path.endsWith('structure')) {
+          return of([{ key: 'account.organization.company_structure' }]);
         }
         return EMPTY;
       })

@@ -5,6 +5,7 @@ import { SharedModule } from 'ish-shared/shared.module';
 import { UserProfileFormComponent } from './components/user/user-profile-form/user-profile-form.component';
 import { UserRolesSelectionComponent } from './components/user/user-roles-selection/user-roles-selection.component';
 import { OrganizationManagementRoutingModule } from './pages/organization-management-routing.module';
+import { StructurePageComponent } from './pages/structure/structure-page.component';
 import { UserCreatePageComponent } from './pages/user-create/user-create-page.component';
 import { UserDetailPageComponent } from './pages/user-detail/user-detail-page.component';
 import { UserEditProfilePageComponent } from './pages/user-edit-profile/user-edit-profile-page.component';
@@ -15,6 +16,7 @@ import { OrganizationManagementStoreModule } from './store/organization-manageme
 
 @NgModule({
   declarations: [
+    StructurePageComponent,
     UserCreatePageComponent,
     UserDetailPageComponent,
     UserEditProfilePageComponent,
