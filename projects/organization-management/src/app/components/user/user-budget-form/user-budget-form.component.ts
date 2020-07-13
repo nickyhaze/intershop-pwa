@@ -4,7 +4,6 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AppFacade } from 'ish-core/facades/app.facade';
-import { HttpError } from 'ish-core/models/http-error/http-error.model';
 import { Locale } from 'ish-core/models/locale/locale.model';
 import { whenTruthy } from 'ish-core/utils/operators';
 
@@ -15,7 +14,6 @@ import { whenTruthy } from 'ish-core/utils/operators';
 })
 export class UserBudgetFormComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
-  @Input() error: HttpError;
 
   currentLocale$: Observable<Locale>;
   periods = ['weekly', 'monthly', 'quarterly'];
@@ -45,12 +43,13 @@ export class UserBudgetFormComponent implements OnInit, OnDestroy {
       if (locale.currency) {
         this.currency = locale.currency;
         this.form.get('currency').setValue(this.currency);
+        this.form.updateValueAndValidity();
       }
     });
   }
 
   get formControlBudget(): AbstractControl {
-    return this.form.get('budget');
+    return this.form && this.form.get('budget');
   }
 
   ngOnDestroy() {

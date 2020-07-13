@@ -16,7 +16,12 @@
     </dl>
     <div [ngbPopover]="BudgetPopover" placement="top" data-testing-id="user-budget-popover">
       <div class="progress">
-        <div class="progress-bar" role="progressbar" [ngStyle]="{ width: usedBudgetPercentage | percent }">
+        <div
+          class="progress-bar"
+          [ngClass]="{ 'bg-danger': usedBudgetPercentage * 100 > 90 }"
+          [ngStyle]="{ width: usedBudgetPercentage | percent }"
+          role="progressbar"
+        >
           <span class="progress-display">{{ usedBudgetPercentage | percent }}</span>
           <ng-template #BudgetPopover>
             <div class="row col-md-12">

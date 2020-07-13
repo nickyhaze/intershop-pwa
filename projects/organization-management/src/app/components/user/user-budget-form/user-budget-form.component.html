@@ -1,8 +1,5 @@
 <div>
-  <div *ngIf="error" role="alert" class="alert alert-danger">
-    <span>{{ error.headers['error-key'] | translate }}</span>
-  </div>
-  <fieldset>
+  <fieldset *ngIf="form">
     <!-- Order Spent Limit-->
     <ish-input
       [form]="form"

@@ -8,6 +8,7 @@ import { UserRolesSelectionComponent } from './components/user/user-roles-select
 import { OrganizationManagementRoutingModule } from './pages/organization-management-routing.module';
 import { UserCreatePageComponent } from './pages/user-create/user-create-page.component';
 import { UserDetailPageComponent } from './pages/user-detail/user-detail-page.component';
+import { UserEditBudgetPageComponent } from './pages/user-edit-budget/user-edit-budget-page.component';
 import { UserEditProfilePageComponent } from './pages/user-edit-profile/user-edit-profile-page.component';
 import { UserEditRolesPageComponent } from './pages/user-edit-roles/user-edit-roles-page.component';
 import { UserBudgetComponent } from './pages/users/user-budget/user-budget.component';
@@ -21,6 +22,7 @@ import { OrganizationManagementStoreModule } from './store/organization-manageme
     UserBudgetFormComponent,
     UserCreatePageComponent,
     UserDetailPageComponent,
+    UserEditBudgetPageComponent,
     UserEditProfilePageComponent,
     UserEditRolesPageComponent,
     UserProfileFormComponent,
