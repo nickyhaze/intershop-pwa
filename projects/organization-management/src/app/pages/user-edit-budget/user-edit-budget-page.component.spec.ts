@@ -30,6 +30,7 @@ describe('User Edit Budget Page Component', () => {
         budgets: {
           budget: { value: 500, currency: 'USD' },
           orderSpentLimit: { value: 9000, currency: 'USD' },
+          remainingBudget: { value: 500, currency: 'USD' },
           budgetPeriod: 'monthly',
         },
       } as B2bUser)
@@ -67,6 +68,7 @@ describe('User Edit Budget Page Component', () => {
 
     expect(component.formDisabled).toBeFalse();
     component.submitForm();
+
     expect(component.formDisabled).toBeFalse();
   });
 });

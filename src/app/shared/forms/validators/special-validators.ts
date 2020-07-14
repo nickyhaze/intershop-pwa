@@ -18,4 +18,9 @@ export class SpecialValidators {
     const integerPattern = /^(?:-?(?:0|[1-9][0-9]*)|)$/;
     return integerPattern.test(control.value) ? undefined : { integer: { valid: false } };
   }
+
+  static moneyAmount(control: FormControl): { [error: string]: { valid: boolean } } {
+    const moneyAmountPattern = /^\d{1,9}(\.\d{1,2})?$/;
+    return moneyAmountPattern.test(control.value) ? undefined : { moneyAmount: { valid: false } };
+  }
 }

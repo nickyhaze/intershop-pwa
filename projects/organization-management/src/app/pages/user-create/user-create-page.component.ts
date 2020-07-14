@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { HttpError } from 'ish-core/models/http-error/http-error.model';
 import { markAsDirtyRecursive } from 'ish-shared/forms/utils/form-utils';
+import { SpecialValidators } from 'ish-shared/forms/validators/special-validators';
 
 import { OrganizationManagementFacade } from '../../facades/organization-management.facade';
 import { B2bUser } from '../../models/b2b-user/b2b-user.model';
@@ -31,10 +32,10 @@ export class UserCreatePageComponent implements OnInit {
     }),
     roleIDs: this.fb.control([]),
     budgets: this.fb.group({
-      orderSpentLimit: ['', Validators.pattern('[0-9.]+$')],
-      budget: ['', Validators.pattern('[0-9.]+$')],
+      orderSpentLimit: ['', SpecialValidators.moneyAmount],
+      budget: ['', SpecialValidators.moneyAmount],
       budgetPeriod: ['weekly'],
-      currency: [''],
+      currency: ['', Validators.required],
     }),
   });
 

@@ -38,14 +38,16 @@ export class UserBudgetFormComponent implements OnInit, OnDestroy {
 
     this.currentLocale$ = this.appFacade.currentLocale$;
 
-    // determine default language from session and available locales
-    this.currentLocale$.pipe(whenTruthy(), takeUntil(this.destroy$)).subscribe(locale => {
-      if (locale.currency) {
-        this.currency = locale.currency;
-        this.form.get('currency').setValue(this.currency);
-        this.form.updateValueAndValidity();
-      }
-    });
+    // if there is no predefined currency determine currency from default locale
+    if (!this.form.get('currency').value) {
+      this.currentLocale$.pipe(whenTruthy(), takeUntil(this.destroy$)).subscribe(locale => {
+        if (locale.currency) {
+          this.form.get('currency').setValue(locale.currency);
+          this.form.updateValueAndValidity();
+        }
+      });
+    }
+    this.currency = this.form.get('currency').value;
   }
 
   get formControlBudget(): AbstractControl {

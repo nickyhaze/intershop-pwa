@@ -166,16 +166,6 @@ export class UsersEffects {
     )
   );
 
-  updateCurrentUserBudgets$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(setUserBudgetsSuccess),
-      mapToPayloadProperty('login'),
-      withLatestFrom(this.store.pipe(select(getLoggedInUser))),
-      filter(([login, currentUser]) => login === currentUser.login),
-      mapTo(loadRolesAndPermissions())
-    )
-  );
-
   successMessageAfterUpdate$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateUserSuccess, setUserRolesSuccess, setUserBudgetsSuccess),

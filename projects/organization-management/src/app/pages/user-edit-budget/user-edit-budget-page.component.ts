@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { HttpError } from 'ish-core/models/http-error/http-error.model';
 import { whenTruthy } from 'ish-core/utils/operators';
 import { markAsDirtyRecursive } from 'ish-shared/forms/utils/form-utils';
+import { SpecialValidators } from 'ish-shared/forms/validators/special-validators';
 
 import { OrganizationManagementFacade } from '../../facades/organization-management.facade';
 import { B2bUser } from '../../models/b2b-user/b2b-user.model';
@@ -41,10 +42,12 @@ export class UserEditBudgetPageComponent implements OnInit, OnDestroy {
 
   initForm(user: B2bUser) {
     this.budgetForm = this.fb.group({
-      orderSpentLimit: [user.budgets?.orderSpentLimit?.value, Validators.pattern('[0-9.]+$')],
-      budget: [user.budgets?.budget?.value, Validators.pattern('[0-9.]+$')],
-      budgetPeriod: [user.budgets?.budgetPeriod || 'weekly'],
-      currency: [''],
+      orderSpentLimit: [user.budgets?.orderSpentLimit?.value, SpecialValidators.moneyAmount],
+      budget: [user.budgets?.budget?.value, SpecialValidators.moneyAmount],
+      budgetPeriod: [
+        !user.budgets?.budgetPeriod || user.budgets?.budgetPeriod === 'none' ? 'weekly' : user.budgets.budgetPeriod,
+      ],
+      currency: [user.budgets?.remainingBudget?.currency, Validators.required],
     });
   }
 
