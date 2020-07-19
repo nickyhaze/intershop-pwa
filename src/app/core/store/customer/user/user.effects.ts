@@ -23,7 +23,6 @@ import {
 } from 'rxjs/operators';
 
 import { CustomerRegistrationType } from 'ish-core/models/customer/customer.model';
-import { HttpErrorMapper } from 'ish-core/models/http-error/http-error.mapper';
 import { PaymentService } from 'ish-core/services/payment/payment.service';
 import { PersonalizationService } from 'ish-core/services/personalization/personalization.service';
 import { UserService } from 'ish-core/services/user/user.service';
@@ -88,13 +87,7 @@ export class UserEffects {
       exhaustMap(credentials =>
         this.userService.signinUser(credentials).pipe(
           map(loginUserSuccess),
-          catchError(error =>
-            of(
-              error.headers.has('error-key')
-                ? loginUserFail({ error: HttpErrorMapper.fromError(error) })
-                : generalError({ error: HttpErrorMapper.fromError(error) })
-            )
-          )
+          catchError(error => of(error.headers['error-key'] ? loginUserFail({ error }) : generalError({ error })))
         )
       )
     )
@@ -167,13 +160,7 @@ export class UserEffects {
         this.userService.createUser(data).pipe(
           // TODO:see #IS-22750 - user should actually be logged in after registration
           map(() => loginUser({ credentials: data.credentials })),
-          catchError(error =>
-            of(
-              error.headers.has('error-key')
-                ? createUserFail({ error: HttpErrorMapper.fromError(error) })
-                : generalError({ error: HttpErrorMapper.fromError(error) })
-            )
-          )
+          catchError(error => of(error.headers['error-key'] ? createUserFail({ error }) : generalError({ error })))
         )
       )
     )

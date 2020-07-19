@@ -114,7 +114,7 @@ export class ApiService {
 
   private execute<T>(options: AvailableOptions, httpCall$: Observable<T>): Observable<T> {
     const wrappedCall$ = options?.skipApiErrorHandling
-      ? httpCall$
+      ? httpCall$.pipe(catchError(error => this.apiServiceErrorHandler.mapError<T>(error)))
       : httpCall$.pipe(catchError(error => this.apiServiceErrorHandler.dispatchCommunicationErrors<T>(error)));
 
     if (options?.runExclusively) {

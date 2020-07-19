@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable, throwError } from 'rxjs';
+import { EMPTY, Observable, of, throwError } from 'rxjs';
 
 import { HttpErrorMapper } from 'ish-core/models/http-error/http-error.mapper';
 import { communicationTimeoutError, serverError } from 'ish-core/store/core/error';
@@ -24,6 +24,12 @@ export class ApiServiceErrorHandler {
       this.store.dispatch(serverError({ error: mappedError }));
       return EMPTY;
     }
-    return throwError(error);
+    return throwError(mappedError);
+  }
+
+  // tslint:disable-next-line: ban-types
+  mapError<T>(error: HttpErrorResponse): Observable<T> {
+    // re-cast for easier access
+    return (of(HttpErrorMapper.fromError(error)) as unknown) as Observable<T>;
   }
 }

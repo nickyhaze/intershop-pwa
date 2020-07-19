@@ -16,11 +16,7 @@ export class HttpErrorMapper {
       message: error.message,
       errorCode: HttpErrorMapper.getErrorCode(error),
       error:
-        typeof error.error === 'string'
-          ? error.error
-          : HttpErrorMapper.determineErrorMessage(
-              error.error && error.error.errors && error.error.errors.length && error.error.errors[0]
-            ),
+        typeof error.error === 'string' ? error.error : HttpErrorMapper.determineErrorMessage(error?.error?.errors[0]),
       status: error.status,
       statusText: error.statusText,
       headers,
@@ -37,13 +33,6 @@ export class HttpErrorMapper {
 
   // tslint:disable-next-line:ban-types
   private static getErrorCode(httpErrorResponse: HttpErrorResponse) {
-    return (
-      (httpErrorResponse &&
-        httpErrorResponse.error &&
-        httpErrorResponse.error.errors &&
-        httpErrorResponse.error.errors[0] &&
-        httpErrorResponse.error.errors[0].code) ||
-      undefined
-    );
+    return httpErrorResponse?.error?.errors?.[0]?.code;
   }
 }

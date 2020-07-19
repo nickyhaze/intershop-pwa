@@ -1,8 +1,8 @@
 import * as using from 'jasmine-data-provider';
 import { anything } from 'ts-mockito';
 
-import { HttpError } from 'ish-core/models/http-error/http-error.model';
 import { loginUserSuccess } from 'ish-core/store/customer/user';
+import { makeHttpError } from 'ish-core/utils/dev/api-service-utils';
 
 import { communicationTimeoutError, generalError, serverError } from './error.actions';
 import { errorReducer, initialState } from './error.reducer';
@@ -38,8 +38,8 @@ describe('Error Reducer', () => {
       },
       {
         state: initialState,
-        action: communicationTimeoutError({ error: {} as HttpError }),
-        expected: { current: {}, type: communicationTimeoutError.type },
+        action: communicationTimeoutError({ error: makeHttpError({}) }),
+        expected: { current: { name: 'HttpErrorResponse' }, type: communicationTimeoutError.type },
       },
       {
         state: initialState,
