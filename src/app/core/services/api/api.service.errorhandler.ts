@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { ErrorHandler, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, of, throwError } from 'rxjs';
 
@@ -8,19 +9,24 @@ import { communicationTimeoutError, serverError } from 'ish-core/store/core/erro
 
 @Injectable({ providedIn: 'root' })
 export class ApiServiceErrorHandler {
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private errorHandler: ErrorHandler,
+    @Inject(PLATFORM_ID) private platformId: string
+  ) {}
 
   // tslint:disable-next-line:ban-types
   dispatchCommunicationErrors<T>(error: HttpErrorResponse): Observable<T> {
+    if (!isPlatformBrowser(this.platformId)) {
+      this.errorHandler.handleError(error);
+    }
     const mappedError = HttpErrorMapper.fromError(error);
 
     if (error.status === 0) {
-      console.error(error);
       this.store.dispatch(communicationTimeoutError({ error: mappedError }));
       return EMPTY;
     }
     if (error.status >= 500 && error.status < 600) {
-      console.error(error);
       this.store.dispatch(serverError({ error: mappedError }));
       return EMPTY;
     }
