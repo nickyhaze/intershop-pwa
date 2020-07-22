@@ -221,7 +221,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('Logout actions', () => {
     it('should unset authorized and customer when reducing LogoutUser', () => {
       const oldState = { ...initialState, customer, authorized: true };
 
@@ -231,7 +231,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('LoadCompanyUser actions', () => {
     it('should set user when LoadCompanyUserSuccess action is reduced', () => {
       const newState = userReducer(initialState, loadCompanyUserSuccess({ user }));
 
@@ -247,7 +247,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('Create user actions', () => {
     it('should set error when CreateUserFail action is reduced', () => {
       const error = makeHttpError({ message: 'invalid' });
       const action = createUserFail({ error });
@@ -257,7 +257,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('Update user actions', () => {
     it('should loading to true when UpdateUser action is reduced', () => {
       const action = updateUser({ user: {} as User });
       const state = userReducer(initialState, action);
@@ -287,7 +287,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('Update user password actions', () => {
     it('should loading to true when UpdateUserPassword action is reduced', () => {
       const action = updateUserPassword({ password: '123', currentPassword: '1234' });
       const state = userReducer(initialState, action);
@@ -312,7 +312,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('Update customer actions', () => {
     it('should loading to true when UpdateCustomer action is reduced', () => {
       const action = updateCustomer({ customer: {} as Customer });
       const state = userReducer(initialState, action);
@@ -342,7 +342,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('LoadUserPaymentMethods action', () => {
     it('should set loading when reduced', () => {
       const action = loadUserPaymentMethods();
       const response = userReducer(initialState, action);
@@ -351,7 +351,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('LoadUserPaymentMethodsSuccess action', () => {
     it('should set success when reduced', () => {
       const action = loadUserPaymentMethodsSuccess({ paymentMethods: [{ id: 'ISH_CREDITCARD' } as PaymentMethod] });
       const response = userReducer(initialState, action);
@@ -361,7 +361,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('LoadUserPaymentMethodsFail action', () => {
     it('should set error when reduced', () => {
       const error = makeHttpError({ message: 'invalid' });
       const action = loadUserPaymentMethodsFail({ error });
@@ -372,7 +372,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('DeleteUserPayment action', () => {
     it('should set loading when reduced', () => {
       const action = deleteUserPaymentInstrument({ id: 'paymentInstrumentId' });
       const response = userReducer(initialState, action);
@@ -381,7 +381,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('DeleteUserPaymentSuccess action', () => {
     it('should set loading to false when reduced', () => {
       const action = deleteUserPaymentInstrumentSuccess();
       const response = userReducer(initialState, action);
@@ -390,7 +390,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('DeleteUserPaymentFail action', () => {
     it('should set error when reduced', () => {
       const error = makeHttpError({ message: 'invalid' });
       const action = deleteUserPaymentInstrumentFail({ error });
@@ -401,7 +401,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('Password Reminder initialState', () => {
     it('should have nothing in it when unmodified', () => {
       expect(initialState.passwordReminderError).toBeUndefined();
       expect(initialState.passwordReminderSuccess).toBeFalsy();
@@ -409,7 +409,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('RequestPasswordReminderSuccess action', () => {
     it('should set success when reduced', () => {
       const action = requestPasswordReminderSuccess();
       const response = userReducer(initialState, action);
@@ -420,7 +420,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('RequestPasswordReminderFail action', () => {
     it('should set error when reduced', () => {
       const error = makeHttpError({ message: 'invalid' });
       const action = requestPasswordReminderFail({ error });
@@ -432,7 +432,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('RequestPasswordReminderReset action', () => {
     it('should set success & reset when reduced', () => {
       let state = userReducer(initialState, requestPasswordReminderSuccess());
       state = userReducer(state, resetPasswordReminder());
@@ -443,7 +443,7 @@ describe('User Reducer', () => {
     });
   });
 
-  describe('User Reducer', () => {
+  describe('RequestPasswordReminder action', () => {
     it('should set loading when reduced', () => {
       const data: PasswordReminder = {
         email: 'patricia@test.intershop.de',
