@@ -147,7 +147,7 @@ describe('User Selectors', () => {
     expect(err.status).toEqual(401);
   });
 
-  describe('User Selectors', () => {
+  describe('loading payment methods', () => {
     beforeEach(() => {
       store$.dispatch(loadUserPaymentMethods());
     });
@@ -201,7 +201,7 @@ describe('User Selectors', () => {
     expect(getUserLoading(store$.state)).toBeFalse();
   });
 
-  describe('User Selectors', () => {
+  describe('getPriceDisplayType', () => {
     describe('without config', () => {
       it.each([
         ['gross', undefined],
