@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 
 import { TactonProductConfigurationParameter } from '../models/tacton-product-configuration/tacton-product-configuration.model';
 import {
@@ -11,9 +11,14 @@ import {
   getCurrentProductConfiguration,
   getCurrentStepConfig,
   getProductConfigurationLoading,
+  startConfigureTactonProduct,
   uncommitTactonConfigurationValue,
 } from '../store/product-configuration';
-import { getSelfServiceApiConfiguration, getTactonProductForSKU } from '../store/tacton-config';
+import {
+  getSelfServiceApiConfiguration,
+  getTactonProductForSKU,
+  getTactonProductForSelectedProduct,
+} from '../store/tacton-config';
 
 // tslint:disable:member-ordering
 @Injectable({ providedIn: 'root' })
@@ -42,5 +47,11 @@ export class TactonFacade {
   }
   uncommitValue(parameter: TactonProductConfigurationParameter) {
     this.store.dispatch(uncommitTactonConfigurationValue({ valueId: parameter.name }));
+  }
+
+  resetConfiguration() {
+    this.store
+      .pipe(select(getTactonProductForSelectedProduct), take(1))
+      .subscribe(productPath => this.store.dispatch(startConfigureTactonProduct({ productPath })));
   }
 }
