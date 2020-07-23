@@ -7,6 +7,7 @@ import { TactonProductConfigurationParameter } from '../models/tacton-product-co
 import {
   changeTactonConfigurationStep,
   commitTactonConfigurationValue,
+  getConfigurationStepConfig,
   getConfigurationStepTree,
   getCurrentProductConfiguration,
   getCurrentStepConfig,
@@ -37,6 +38,7 @@ export class TactonFacade {
   configurationTree$ = this.store.pipe(select(getConfigurationStepTree));
 
   currentStep$ = this.store.pipe(select(getCurrentStepConfig));
+  stepConfig$ = this.store.pipe(select(getConfigurationStepConfig));
 
   changeConfigurationStep(step: string) {
     this.store.dispatch(changeTactonConfigurationStep({ step }));
@@ -53,5 +55,10 @@ export class TactonFacade {
     this.store
       .pipe(select(getTactonProductForSelectedProduct), take(1))
       .subscribe(productPath => this.store.dispatch(startConfigureTactonProduct({ productPath })));
+  }
+
+  submitConfiguration() {
+    // tslint:disable-next-line: no-console
+    console.log('submitting current tacton configuration');
   }
 }
